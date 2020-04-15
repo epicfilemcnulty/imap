@@ -16,5 +16,6 @@ RUN apk add --no-cache lua
 COPY --from=builder /home/builder/.abuild/vladimir@deviant.guru-*.rsa.pub /etc/apk/keys/
 COPY --from=builder /home/builder/built/builder/x86_64/dovecot-2.3.10-r0.apk /root/
 COPY entrypoint.sh /
-RUN apk add --no-cache /root/dovecot-2.3.10-r0.apk
+RUN apk add --no-cache /root/dovecot-2.3.10-r0.apk && rm /root/dovecot-2.3.10-r0.apk
+COPY users.lua /scripts/
 ENTRYPOINT ["/entrypoint.sh"]
